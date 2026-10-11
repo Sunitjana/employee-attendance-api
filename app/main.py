@@ -1232,16 +1232,10 @@ def round_monthly_result(result: dict) -> dict:
 
     if result.get("attendance_pct") is not None:
 
-        result["attendance_pct"] = round_half_up(result["attendance_pct"], 2)
+        result["attendance_pct"] = round_half_up(result["attendance_pct"], 4)
 
     return result
 
-
-# ---------------------------------------------------------------------------
-
-# System and employee endpoints
-
-# ---------------------------------------------------------------------------
 
 @app.get("/health")
 
@@ -1811,9 +1805,7 @@ def explain_endpoint(
 
         collection_name = "employees"
 
-    # Explain output can include BSON-only values (for example, bson.timestamp.Timestamp).
-
-    # Convert it to Extended JSON structures so FastAPI/Pydantic can serialize the response.
+    
 
     explanation_json_safe = json.loads(json_util.dumps(explanation))
 
